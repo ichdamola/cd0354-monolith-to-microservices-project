@@ -24,8 +24,8 @@ jobs:
       run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
       
       env:
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
         
     - name: Pushing to Docker Hub
       run: docker push udagram-api-feed ichdamola/udagram-api-feed:adedamola-udagram-api-feed-v1.0
