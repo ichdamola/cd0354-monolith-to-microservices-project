@@ -14,6 +14,15 @@ jobs:
     steps:
     - uses: actions/checkout@master
     
+    - name: test
+      run: |
+        if[ "$DOCKER_USERNAME" == "adedadamola@gmail.com"]
+        then 
+          echo "Nice"
+        fi
+      env:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      
     - name: Publish Feed API Service to Registry
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
