@@ -16,7 +16,7 @@ jobs:
     
     - name: test
       run: |
-        if[ "$DOCKER_USERNAME" == "adedadamola@gmail.com"]
+        if [ "$DOCKER_USERNAME" == "adedadamola@gmail.com"]
         then 
           echo "Nice"
         fi
