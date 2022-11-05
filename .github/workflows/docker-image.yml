@@ -19,7 +19,7 @@ jobs:
       with:
         image: ichdamola/udagram-api-feed
         tags: v1, adedamola-udagram-api-feed
-        registry: hub.docker.com/repository/docker
+        registry: docker.io
         dockerfile: ./udagram-api-feed/Dockerfile
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
