@@ -14,24 +14,20 @@ jobs:
     steps:
     - uses: actions/checkout@master
     
-    - name: test
-      run: |
-        if [ "$DOCKER_USERNAME" == "adedadamola@gmail.com" ]
-        then 
-          echo "Nice"
-        fi
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+    - name: building feed api
+      run: docker build -t udagram-api-feed ./udagram-api-feed
       
-    - name: Publish Feed API Service to Registry
-      uses: mr-smithers-excellent/docker-build-push@v5
-      with:
-        image: ichdamola/udagram-api-feed
-        tags: v1, adedamola-udagram-api-feed
-        registry: docker.io
-        dockerfile: ./udagram-api-feed/Dockerfile
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_PASSWORD }}
-     
+    - name: tagging feed api
+      run: docker tag udagram-api-feed ichdamola/udagram-api-feed:adedamola-udagram-api-feed-v1.0
+      
+    - name: Logging in
+      run: echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      
+      env:
+        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         
+    - name: Pushing to Docker Hub
+      run: docker push udagram-api-feed ichdamola/udagram-api-feed:adedamola-udagram-api-feed-v1.0
+      
    
