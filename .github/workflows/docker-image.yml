@@ -14,6 +14,15 @@ jobs:
     steps:
     - uses: actions/checkout@master
     
+    - name: verify env
+      run: |
+        if [ "$USERNAME" == "adedadamola@gmail.com"]
+        then 
+          echo "NICE+++++++"
+        fi
+        env:
+          USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          
     - name: building feed api
       run: docker build -t udagram-api-feed ./udagram-api-feed
       
