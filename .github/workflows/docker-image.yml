@@ -36,6 +36,6 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
         
     - name: Pushing to Docker Hub
-      run: docker push udagram-api-feed ichdamola/udagram-api-feed:adedamola-udagram-api-feed-v1.0
+      run: docker push ichdamola/udagram-api-feed:adedamola-udagram-api-feed-v1.0
       
    
