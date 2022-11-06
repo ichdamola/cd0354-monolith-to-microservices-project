@@ -20,8 +20,8 @@ jobs:
         then 
           echo "NICE+++++++"
         fi
-        env:
-          USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      env:
+        USERNAME: ${{ secrets.DOCKER_USERNAME }}
           
     - name: building feed api
       run: docker build -t udagram-api-feed ./udagram-api-feed
