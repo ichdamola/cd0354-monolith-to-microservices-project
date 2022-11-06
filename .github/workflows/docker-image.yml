@@ -16,7 +16,7 @@ jobs:
     
     - name: verify env
       run: |
-        if [ "$USERNAME" == "adedadamola@gmail.com"]
+        if [ "$USERNAME" == "adedadamola@gmail.com" ]
         then 
           echo "NICE+++++++"
         fi
