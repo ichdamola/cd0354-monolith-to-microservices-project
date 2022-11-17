@@ -1,0 +1,80 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udagram-frontend
+spec:
+  selector:
+    matchLabels:
+      run: udagram-frontend
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        run: udagram-frontend
+    spec:
+      containers:
+        - env:
+            - name: AWS_BUCKET
+              valueFrom:
+                configMapKeyRef:
+                  name: env-udagram-configmap
+                  key: AWS_BUCKET
+            - name: AWS_REGION
+              valueFrom:
+                configMapKeyRef:
+                  name: env-udagram-configmap
+                  key: AWS_REGION
+            - name: JWT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  name: env-udagram-configmap
+                  key: JWT_SECRET
+            - name: URL
+              valueFrom:
+                configMapKeyRef:
+                  name: env-udagram-configmap
+                  key: URL
+            - name: POSTGRES_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: env-udagram-secret
+                  key: POSTGRES_HOST
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: env-udagram-secret
+                  key: POSTGRES_DB
+            - name: POSTGRES_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: env-udagram-secret
+                  key: POSTGRES_USERNAME
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: env-udagram-secret
+                  key: POSTGRES_PASSWORD
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: env-aws-secret
+                  key: AWS_SECRET_ACCESS_KEY
+            - name: AWS_PROFILE
+              valueFrom:
+                configMapKeyRef:
+                  name: env-udagram-configmap
+                  key: AWS_PROFILE
+            - name: AWS_SECRET_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: env-aws-secret
+                  key: AWS_SECRET_KEY_ID
+          name: udagram-frontend
+          image: ichdamola/udagram-frontend:adedamola-udagram-frontend-v1.0
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              cpu: 512m
+            requests:
+              cpu: 256m

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Secret
+metadata:
+    name: env-udagram-configmap
+type: Opaque
+data:
+    AWS_BUCKET: bXMtZGFtb2xhLWRldg==
+    AWS_REGION: dXMtZWFzdC0x
+    AWS_PROFILE: ZGVmYXVsdA==
+    JWT_SECRET: dGVzdGluZw==
+    URL: aHR0cDovL2xvY2FsaG9zdDo4MTAw
+    DOCKER_USERNAME: YWRlZGFkYW1vbGFAZ21haWwuY29t
