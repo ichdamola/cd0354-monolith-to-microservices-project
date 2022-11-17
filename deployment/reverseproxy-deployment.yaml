@@ -17,31 +17,31 @@ spec:
             - name: AWS_BUCKET
               valueFrom:
                 configMapKeyRef:
-                  name: env-udagram-configmap
+                  name: udagram-configmap
                   key: AWS_BUCKET
             - name: AWS_REGION
               valueFrom:
                 configMapKeyRef:
-                  name: env-udagram-configmap
+                  name: udagram-configmap
                   key: AWS_REGION
             - name: JWT_SECRET
               valueFrom:
                 configMapKeyRef:
-                  name: env-udagram-configmap
+                  name: udagram-configmap
                   key: JWT_SECRET
             - name: URL
               valueFrom:
                 configMapKeyRef:
-                  name: env-udagram-configmap
+                  name: udagram-configmap
                   key: URL
             - name: POSTGRES_HOST
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: env-udagram-secret
                   key: POSTGRES_HOST
             - name: POSTGRES_DB
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: env-udagram-secret
                   key: POSTGRES_DB
             - name: POSTGRES_USERNAME
@@ -62,13 +62,13 @@ spec:
             - name: AWS_PROFILE
               valueFrom:
                 configMapKeyRef:
-                  name: env-udagram-configmap
+                  name: udagram-configmap
                   key: AWS_PROFILE
-            - name: AWS_SECRET_KEY_ID
+            - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
                   name: env-aws-secret
-                  key: AWS_SECRET_KEY_ID
+                  key: AWS_ACCESS_KEY_ID
           name: reverseproxy
           image: ichdamola/reverseproxy:adedamola-udagram-reverseproxy-v1.0
           ports:

@@ -1,47 +1,47 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: udagram-api-feed
+  name: backend-feed
 spec:
   selector:
     matchLabels:
-      run: udagram-api-feed
+      run: backend-feed
   replicas: 2
   template:
     metadata:
       labels:
-        run: udagram-api-feed
+        run: backend-feed
     spec:
       containers:
         - env:
             - name: AWS_BUCKET
               valueFrom:
                 configMapKeyRef:
-                  name: env-udagram-configmap
+                  name: udagram-configmap
                   key: AWS_BUCKET
             - name: AWS_REGION
               valueFrom:
                 configMapKeyRef:
-                  name: env-udagram-configmap
+                  name: udagram-configmap
                   key: AWS_REGION
             - name: JWT_SECRET
               valueFrom:
                 configMapKeyRef:
-                  name: env-udagram-configmap
+                  name: udagram-configmap
                   key: JWT_SECRET
             - name: URL
               valueFrom:
                 configMapKeyRef:
-                  name: env-udagram-configmap
+                  name: udagram-configmap
                   key: URL
             - name: POSTGRES_HOST
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: env-udagram-secret
                   key: POSTGRES_HOST
             - name: POSTGRES_DB
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   name: env-udagram-secret
                   key: POSTGRES_DB
             - name: POSTGRES_USERNAME
@@ -62,14 +62,14 @@ spec:
             - name: AWS_PROFILE
               valueFrom:
                 configMapKeyRef:
-                  name: env-udagram-configmap
+                  name: udagram-configmap
                   key: AWS_PROFILE
-            - name: AWS_SECRET_KEY_ID
+            - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
                   name: env-aws-secret
-                  key: AWS_SECRET_KEY_ID
-          name: udagram-api-feed
+                  key: AWS_ACCESS_KEY_ID
+          name: backend-feed
           image: ichdamola/udagram-api-feed:adedamola-udagram-api-feed-v1.0
           ports:
             - containerPort: 8080
